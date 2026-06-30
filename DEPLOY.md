@@ -5,7 +5,7 @@ Image wird per GitHub Actions automatisch nach GHCR veröffentlicht.
 
 ## Image (public, ohne Login ziehbar)
 
-- `ghcr.io/dg1001/jfs-comex:1.0.0` — feste Version, **für Prod empfohlen**
+- `ghcr.io/dg1001/jfs-comex:1.0.1` — feste Version, **für Prod empfohlen**
 - `ghcr.io/dg1001/jfs-comex:latest` — folgt `main`
 
 Auto-Build läuft bei jedem Push auf `main` und bei `v*`-Tags.
@@ -34,7 +34,7 @@ Kein `ports:`-Mapping — Traefik routet intern über das Docker-Netz und macht 
 ```yaml
 services:
   comex:
-    image: ghcr.io/dg1001/jfs-comex:1.0.0
+    image: ghcr.io/dg1001/jfs-comex:1.0.1
     restart: unless-stopped
     environment:
       - BOF_ADMIN_TOKEN=${BOF_ADMIN_TOKEN:?set BOF_ADMIN_TOKEN in .env}
@@ -75,7 +75,7 @@ App: `https://comex.jugs.org/` · Admin: `https://comex.jugs.org/admin` (Token a
 docker compose pull && docker compose up -d   # bei :latest
 ```
 
-Bei gepinntem `:1.0.0` den Tag in der `compose.yml` auf die neue Version setzen.
+Bei gepinntem `:1.0.1` den Tag in der `compose.yml` auf die neue Version setzen.
 
 ## Datenschutz / Teardown
 

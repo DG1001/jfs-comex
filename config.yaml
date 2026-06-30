@@ -76,18 +76,19 @@ meeting_points:
     capacity: 6
     x: 0.18
     y: 0.85
-    slots: [vormittag-1, mittag-1]   # z.B. nur bei gutem Wetter / wärmeren Slots    
+    slots: [vormittag-1, mittag-1]   # z.B. nur bei gutem Wetter / wärmeren Slots
   - id: ce-aussen-2
     name: "Außen 2"
     capacity: 6
     x: 0.28
     y: 0.85
-    slots: [vormittag-1, mittag-1]   # z.B. nur bei gutem Wetter / wärmeren Slots    
+    slots: [vormittag-1, mittag-1]   # z.B. nur bei gutem Wetter / wärmeren Slots
 
 # Slot-Zeiten: jeder Slot beginnt direkt nach dem Ende eines Vortrags und
 # läuft bis zum Ende des nächsten Vortrags. Mittagspause (13:00–14:30) ist
-# in zwei Slots geteilt; der zweite Mittag-Slot läuft bis zum Ende des
-# ersten Nachmittags-Vortrags (15:15).
+# in zwei gleich lange Slots (je 60 Min) geteilt — dazwischen 15 Min
+# Community-Pause (14:00–14:15) zum Wechseln/Verschnaufen. Der zweite
+# Mittag-Slot endet mit dem ersten Nachmittags-Vortrag (15:15).
 # Vortragsraster JFS 2026 (laut javaforum-stuttgart.de/vortraege/2026):
 #   08:45–09:30 · 09:50–10:35 · 11:10–11:55 · 12:15–13:00 · MITTAG
 #   14:30–15:15 · 15:35–16:20 · 16:40–17:25
@@ -109,13 +110,13 @@ slots:
     end: "2026-07-09T13:00:00+02:00"
     cutoff_minutes: 60
   - id: mittag-1
-    name: "13:00 - 13:45"
+    name: "13:00 - 14:00"
     start: "2026-07-09T13:00:00+02:00"
-    end: "2026-07-09T13:45:00+02:00"
+    end: "2026-07-09T14:00:00+02:00"
     cutoff_minutes: 60
   - id: mittag-2
-    name: "13:45 - 15:15"
-    start: "2026-07-09T13:45:00+02:00"
+    name: "14:15 - 15:15"
+    start: "2026-07-09T14:15:00+02:00"
     end: "2026-07-09T15:15:00+02:00"
     cutoff_minutes: 60
   - id: nachmittag-1
