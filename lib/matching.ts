@@ -97,14 +97,16 @@ function matchSlot(
         preferred: JSON.parse(t.preferred_slots) as string[],
       }));
 
-    const priority = (t: (typeof eligible)[number]): number => {
-      if (!t.preferred.length) return 1;
-      if (t.preferred.includes(slot.id)) return 0;
-      return 2;
-    };
+    // Zwischenlösung: Themen mit genau diesem Slot als Wunsch werden in diesem
+    // Slot bevorzugt platziert — sie sollen nicht durch fremde Themen verdrängt
+    // werden. Alle übrigen (ohne Wunsch ODER mit einem anderen Wunsch-Slot)
+    // konkurrieren gleichberechtigt. Innerhalb beider Gruppen entscheidet die
+    // Teilnehmerzahl (absteigend).
+    const prefersThisSlot = (t: (typeof eligible)[number]): number =>
+      t.preferred.includes(slot.id) ? 0 : 1;
 
     const sorted = [...eligible].sort((a, b) => {
-      const p = priority(a) - priority(b);
+      const p = prefersThisSlot(a) - prefersThisSlot(b);
       if (p !== 0) return p;
       return b.interest_count - a.interest_count;
     });
