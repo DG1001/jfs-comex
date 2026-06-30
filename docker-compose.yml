@@ -1,0 +1,14 @@
+services:
+  bof:
+    build: .
+    image: bof-app-jfs2026:latest
+    restart: unless-stopped
+    environment:
+      - BOF_ADMIN_TOKEN=${BOF_ADMIN_TOKEN:?set BOF_ADMIN_TOKEN in .env}
+      - BOF_DB_PATH=/app/data/bof.sqlite
+      - BOF_CONFIG_PATH=/app/config.yaml
+    volumes:
+      - ./data:/app/data
+      - ./config.yaml:/app/config.yaml:ro
+    ports:
+      - "3000:3000"

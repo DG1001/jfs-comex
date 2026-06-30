@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background-color: #f5f7fb;
+  color: #1b2436;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-medium transition;
+  }
+  .btn-primary {
+    @apply btn bg-jfs-primary text-white hover:bg-blue-700 active:bg-blue-800 disabled:bg-slate-300 disabled:text-slate-500;
+  }
+  .btn-secondary {
+    @apply btn bg-white border border-slate-300 text-slate-800 hover:bg-slate-50;
+  }
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+  }
+  .card {
+    @apply rounded-xl border border-slate-200 bg-white p-4 shadow-sm;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700;
+  }
+  .chip-primary {
+    @apply inline-flex items-center rounded-full bg-jfs-primary/10 px-2.5 py-0.5 text-xs font-medium text-jfs-primary;
+  }
+  .chip-warn {
+    @apply inline-flex items-center rounded-full bg-jfs-accent/15 px-2.5 py-0.5 text-xs font-medium text-orange-700;
+  }
+  .chip-success {
+    @apply inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800;
+  }
+  .chip-muted {
+    @apply inline-flex items-center rounded-full bg-slate-200 px-2.5 py-0.5 text-xs font-medium text-slate-600;
+  }
+  .input {
+    @apply block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm placeholder:text-slate-400 focus:border-jfs-primary focus:outline-none focus:ring-2 focus:ring-jfs-primary/30;
+  }
+  .label {
+    @apply block text-sm font-medium text-slate-700 mb-1;
+  }
+}

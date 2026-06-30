@@ -1,0 +1,130 @@
+# Konfiguration der Community-Exchange-App für das JFS 2026.
+# Wird beim Start gelesen. Änderungen erfordern Neustart.
+
+event:
+  name: "Java Forum Stuttgart 2026 — Community Exchange"
+  # Lokale Zeitzone für Slot-Zeiten (nur Anzeige, die ISO-Timestamps unten sind maßgeblich)
+  timezone: "Europe/Berlin"
+
+matching:
+  # Mindestanzahl Interessenten, ab der ein Thema einem Treffpunkt zugeteilt wird
+  min_interested: 3
+
+# Hintergrund-Lageplan (SVG unter public/). Eine Karte, eine Ebene.
+# `marker_box` ist das visuelle "Schild" rechts unten, in dem die Treffpunkt-
+# Marker liegen — Position und Größe in 0..1 Anteilen der Karte. Fix
+# verdrahtet: Anpassungen direkt hier in der Config, kein Admin-UI mehr.
+map:
+  plan: "/lageplan/comex.svg"
+  marker_box:
+    x: 0.670
+    y: 0.674
+    w: 0.300
+    h: 0.310
+  # Leitpfeil von der Box auf die Designer-Kreise in der Community-Area
+  # (stellt den räumlichen Bezug her). `from` = Box-Ansatz, `to` = Ziel
+  # auf der Karte. Beide in 0..1 Anteilen.
+  connector:
+    from: { x: 0.800, y: 0.680 }
+    to:   { x: 0.720, y: 0.610 }
+
+# Treffpunkte: die 6 Community-Exchange-Areas im Hegel-Foyer.
+# Reihenfolge: oben links → rechts (CE 1, 2, 3), dann unten links → rechts (CE 4, 5, 6).
+# `x`/`y` sind die Position auf dem Lageplan (0..1, im Admin verschiebbar) und
+# liegen ungefähr auf den orangefarbenen Designer-Kreisen — Feinjustierung im
+# Admin per Drag.
+# `slots` referenziert die Slot-IDs unten. Leere Liste = im Slot nicht aktiv.
+meeting_points:
+  - id: ce-1
+    name: "CE 1"
+    capacity: 8
+    x: 0.595
+    y: 0.61
+    slots: [vormittag-1, vormittag-2, vormittag-3, mittag-1, mittag-2, nachmittag-1, nachmittag-2]
+  - id: ce-2
+    name: "CE 2"
+    capacity: 8
+    x: 0.645
+    y: 0.61
+    slots: [vormittag-1, vormittag-2, vormittag-3, mittag-1, mittag-2, nachmittag-1, nachmittag-2]
+  - id: ce-3
+    name: "CE 3"
+    capacity: 8
+    x: 0.695
+    y: 0.61
+    slots: [vormittag-1, vormittag-2, vormittag-3, mittag-1, mittag-2, nachmittag-1, nachmittag-2]
+  - id: ce-4
+    name: "CE 4"
+    capacity: 8
+    x: 0.595
+    y: 0.69
+    slots: [vormittag-1, vormittag-2, vormittag-3, mittag-1, mittag-2, nachmittag-1, nachmittag-2]
+  - id: ce-5
+    name: "CE 5"
+    capacity: 8
+    x: 0.645
+    y: 0.69
+    slots: [vormittag-1, vormittag-2, vormittag-3, mittag-1, mittag-2, nachmittag-1, nachmittag-2]
+  - id: ce-6
+    name: "CE 6"
+    capacity: 8
+    x: 0.695
+    y: 0.69
+    slots: [vormittag-1, vormittag-2, vormittag-3, mittag-1, mittag-2, nachmittag-1, nachmittag-2]
+  - id: ce-aussen-1
+    name: "Außen 1"
+    capacity: 6
+    x: 0.18
+    y: 0.85
+    slots: [vormittag-1, mittag-1]   # z.B. nur bei gutem Wetter / wärmeren Slots    
+  - id: ce-aussen-2
+    name: "Außen 2"
+    capacity: 6
+    x: 0.28
+    y: 0.85
+    slots: [vormittag-1, mittag-1]   # z.B. nur bei gutem Wetter / wärmeren Slots    
+
+# Slot-Zeiten: jeder Slot beginnt direkt nach dem Ende eines Vortrags und
+# läuft bis zum Ende des nächsten Vortrags. Mittagspause (13:00–14:30) ist
+# in zwei Slots geteilt; der zweite Mittag-Slot läuft bis zum Ende des
+# ersten Nachmittags-Vortrags (15:15).
+# Vortragsraster JFS 2026 (laut javaforum-stuttgart.de/vortraege/2026):
+#   08:45–09:30 · 09:50–10:35 · 11:10–11:55 · 12:15–13:00 · MITTAG
+#   14:30–15:15 · 15:35–16:20 · 16:40–17:25
+# cutoff_minutes: Minuten vor `start`, ab denen das Matching fixiert ist.
+slots:
+  - id: vormittag-1
+    name: "09:30 - 10:35"
+    start: "2026-07-09T09:30:00+02:00"
+    end: "2026-07-09T10:35:00+02:00"
+    cutoff_minutes: 60
+  - id: vormittag-2
+    name: "10:35 - 11:55"
+    start: "2026-07-09T10:35:00+02:00"
+    end: "2026-07-09T11:55:00+02:00"
+    cutoff_minutes: 60
+  - id: vormittag-3
+    name: "11:55 - 13:00"
+    start: "2026-07-09T11:55:00+02:00"
+    end: "2026-07-09T13:00:00+02:00"
+    cutoff_minutes: 60
+  - id: mittag-1
+    name: "13:00 - 13:45"
+    start: "2026-07-09T13:00:00+02:00"
+    end: "2026-07-09T13:45:00+02:00"
+    cutoff_minutes: 60
+  - id: mittag-2
+    name: "13:45 - 15:15"
+    start: "2026-07-09T13:45:00+02:00"
+    end: "2026-07-09T15:15:00+02:00"
+    cutoff_minutes: 60
+  - id: nachmittag-1
+    name: "15:15 - 16:20"
+    start: "2026-07-09T15:15:00+02:00"
+    end: "2026-07-09T16:20:00+02:00"
+    cutoff_minutes: 60
+  - id: nachmittag-2
+    name: "16:20 - 17:25"
+    start: "2026-07-09T16:20:00+02:00"
+    end: "2026-07-09T17:25:00+02:00"
+    cutoff_minutes: 60
