@@ -1491,7 +1491,7 @@ function ProgrammModal({ onClose }: { onClose: () => void }) {
                   {slot.talks.map(t => (
                     <li key={t.room} className="px-3 py-2 text-sm">
                       <div className="flex items-baseline gap-2">
-                        <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-600">
+                        <span className="shrink-0 whitespace-nowrap rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-600">
                           {t.room}
                         </span>
                         <span className="font-medium text-slate-900">{t.title}</span>
@@ -1506,7 +1506,7 @@ function ProgrammModal({ onClose }: { onClose: () => void }) {
             );
           })}
           <div className="pb-2 text-center text-[10px] text-slate-400">
-            Stand: Scrape von java-forum-stuttgart.de · 2026-06-27
+            Stand: Scrape von java-forum-stuttgart.de · 2026-07-01
           </div>
         </div>
       </div>

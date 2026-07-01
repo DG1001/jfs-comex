@@ -3,6 +3,36 @@
 Laufendes Änderungsprotokoll aller Anpassungen nach dem V1-Stand. Neueste
 Einträge stehen oben.
 
+## 2026-07-01 — Vortragsprogramm: echte Saalnamen + aktuelle Zeitslots (finales Programm)
+
+**Fachlich (was/warum):** Das JFS-2026-Programm steht inzwischen fest, inkl.
+Raumzuteilung und einiger seit dem letzten Scrape (2026-06-27) verschobener
+Vorträge (java-forum-stuttgart.de/vortraege/2026). In der Programm-Übersicht
+der App (Button „Vortragsprogramm anzeigen") stand bei jedem Vortrag bislang
+nur ein Platzhalter-Kürzel (`A1`, `B2`, …) und zum Teil ein veralteter
+Zeitslot. Jetzt zeigt die Übersicht den tatsächlichen **Saal** (Beethoven,
+Mozart, Silcher, Hegel, Schiller Saal, Bonn-Hamburg, Köln) und die **aktuellen
+Zeitblöcke**. Konkret geänderte Platzierungen gegenüber vorher: „Dein Coding
+Agent belügt dich nicht – er vergisst dich" (Frederik Wystup) läuft jetzt am
+Nachmittag **15:35–16:20** (Beethoven Saal) statt vormittags; im Gegenzug ist
+„Just like the simulations: Teaching robots to play chess" von 15:35 auf
+**09:50–10:35** (Silcher Saal) gerückt; „Der Keycloak-Fehler …" heißt nun
+vollständig „… (und wie du ihn vermeidest)". Die Säle sind feste Spalten je
+Track (A = Beethoven … G = Köln).
+
+**Technisch (wie/wo):** `lib/programm.ts` vollständig aus dem aktuellen,
+maßgeblichen Raster der offiziellen Seite neu generiert (7 Blöcke × 7 Säle =
+49 Vorträge). Die Zuordnung Block→Saal→Vortrag wurde direkt aus den
+Zeit-Header- und Zellen-Markern der Seite abgeleitet (die Zeit-Header sind im
+HTML durch Kommentar-Knoten zerstückelt — `15:35<!-- --> -<!-- -->16:20` —
+und wurden vor dem Parsen bereinigt). Speaker-Listen unverändert und 1:1 gegen
+den vorherigen Stand gegengeprüft (0 Abweichungen). `track` jetzt konsistent
+als Spaltenkennung A–G aus der festen Saal-Reihenfolge; Interface-Kommentare
+und Scrape-Datum aktualisiert. In `app/page.tsx` (`ProgrammModal`) das
+Raum-Badge auf `whitespace-nowrap shrink-0` gesetzt, damit die längeren
+Saalnamen nicht umbrechen, und das „Stand"-Datum im Footer auf 2026-07-01
+gezogen.
+
 ## 2026-06-30 — Matching: Wunsch-Slot schützt, sonst Teilnehmerzahl (Zwischenlösung)
 
 **Fachlich (was/warum):** Verfeinerung der vorherigen Änderung. Statt rein nach
