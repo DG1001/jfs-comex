@@ -3,7 +3,9 @@
 // Aufrufe (statische Assets aus dem Cache) und zeigt offline eine
 // Auffang-Seite. Live-Daten (/api/*) laufen IMMER über das Netzwerk.
 
-const CACHE = 'ce-shell-v1';
+// Bei jeder App-Änderung hochzählen — der alte Cache wird beim `activate`
+// gelöscht, sodass Clients die neue App-Shell laden (statt aus dem Cache).
+const CACHE = 'ce-shell-v2';
 const PRECACHE = ['/', '/offline.html'];
 
 self.addEventListener('install', event => {

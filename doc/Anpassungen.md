@@ -3,6 +3,26 @@
 Laufendes Änderungsprotokoll aller Anpassungen nach dem V1-Stand. Neueste
 Einträge stehen oben.
 
+## 2026-07-01 — PWA-Cache-Bump + Doku-Korrekturen (Persistenz/Teardown)
+
+**Fachlich (was/warum):** Zwei README-Aussagen waren irreführend: Es klang, als
+lägen Teilnehmerdaten nur im Browser-`localStorage` und als genüge das
+Abschalten des Containers, um alles spurlos zu entfernen. Tatsächlich liegen
+Anzeigename, Passwort-Hash, Participant-ID und Themen serverseitig in der
+SQLite-Datei, und die liegt bewusst im `./data`-Volume **außerhalb** des
+Containers (damit ein Image-Update die Daten nicht löscht). Aufräumen nach dem
+Event heißt daher: Container **und** `./data` löschen. Außerdem für das
+PWA-Update die Service-Worker-Cache-Version hochgezogen, damit Clients nach dem
+Release die neue App-Shell laden statt einer veralteten aus dem Cache.
+
+**Technisch (wie/wo):** In `README.md` den QR-Code-Abschnitt (im `localStorage`
+liegt nur die Participant-ID fürs Auto-Login) und den Datenschutz-Punkt
+(Persistenz im externen `./data`-Volume, Teardown = Container + `./data`)
+korrigiert — konsistent zum Teardown-Absatz in `DEPLOY.md`. In `public/sw.js`
+`CACHE` von `ce-shell-v1` auf `ce-shell-v2` erhöht; der `activate`-Handler
+löscht dadurch den alten Cache und precached die Shell (`/`, `/offline.html`)
+neu. Konvention (Kommentar ergänzt): bei jeder App-Änderung hochzählen.
+
 ## 2026-07-01 — Vortragsprogramm: echte Saalnamen + aktuelle Zeitslots (finales Programm)
 
 **Fachlich (was/warum):** Das JFS-2026-Programm steht inzwischen fest, inkl.

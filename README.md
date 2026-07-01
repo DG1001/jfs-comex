@@ -165,15 +165,19 @@ read-only gemountet; Änderungen erfordern einen Container-Neustart.
 
 Teilnehmer rufen die App per QR-Code vor Ort auf. Der QR-Code zeigt auf die
 Domain, unter der die App erreichbar ist (z.B. `https://bof.jfs2026.de/`).
-Pseudonym und Participant-ID werden nur im `localStorage` gehalten — nach dem
-Event genügt das Abschalten des Containers, um die App spurlos zu entfernen.
+Im Browser wird nur die Participant-ID im `localStorage` gehalten (für das
+automatische Wiederanmelden); Pseudonym, Passwort-Hash und Themen liegen
+serverseitig in der SQLite-Datei.
 
 ## Datenschutz
 
 - Keine Ticket-ID, keine E-Mail, kein Klarname erforderlich.
 - Server speichert nur: Anzeigename, gehashtes Passwort, Participant-ID,
   Thementitel/-beschreibung, Zeitstempel.
-- Daten werden mit dem Container entsorgt (SQLite-Datei).
+- Persistenz liegt in der SQLite-Datei im `./data`-Volume **außerhalb** des
+  Containers (bewusst so, damit ein Image-Update die Daten nicht löscht). Zum
+  restlosen Entfernen nach dem Event wird von uns der Container gelöscht **und**
+  `./data` (die SQLite-Datei) entfernt.
 
 ## Bewusst aus V1 ausgeklammert
 
